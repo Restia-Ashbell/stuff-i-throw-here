@@ -198,21 +198,21 @@ rule-providers:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanEasyList.list"
-    path: ./ruleset/BanProgramAD.yaml
+    path: ./ruleset/BanEasyList.yaml
     interval: 259200
 
   BanEasyListChina:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanEasyListChina.list"
-    path: ./ruleset/BanProgramAD.yaml
+    path: ./ruleset/BanEasyListChina.yaml
     interval: 259200
 
   BanEasyPrivacy:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanEasyPrivacy.list"
-    path: ./ruleset/BanProgramAD.yaml
+    path: ./ruleset/BanEasyPrivacy.yaml
     interval: 259200
 
   GoogleCN:
@@ -233,7 +233,7 @@ rule-providers:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list"
-    path: ./ruleset/networktest.yaml
+    path: ./ruleset/ProxyMedia.yaml
     interval: 259200
 
   ProxyLite:
