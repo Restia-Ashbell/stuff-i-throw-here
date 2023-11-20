@@ -261,7 +261,7 @@ rules:
   - RULE-SET,LocalAreaNetwork,🎯 全球直连
   - RULE-SET,BanAD,🛑 全球拦截
   - RULE-SET,BanProgramAD,🛑 全球拦截
-  - RULE-SET,BanEasyList🆎 AdBlock
+  - RULE-SET,BanEasyList,🆎 AdBlock
   - RULE-SET,BanEasyListChina,🆎 AdBlock
   - RULE-SET,BanEasyPrivacy,🆎 AdBlock
   - RULE-SET,GoogleCN,🎯 全球直连
