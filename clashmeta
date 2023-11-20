@@ -166,7 +166,7 @@ proxy-groups:
   - {name: 🐟 漏网之鱼, type: select, proxies: [🚀 节点选择, 🎯 全球直连]}
 
   #分隔,下面是地区分组
-  - {name: 🌏 亚洲节点, type: load-balance, strategy: consistent-hashing, lazy: true, use: [🛫 我的专机], filter: "(?i)港|台|韩|日|新|"}
+  - {name: 🌏 亚洲节点, type: load-balance, strategy: consistent-hashing, lazy: true, use: [🛫 我的专机], filter: "(?i)港|台|韩|日|新"}
 
   - {name: 🌍 欧美节点, type: load-balance, strategy: consistent-hashing, lazy: true, use: [🛫 我的专机], filter: "(?i)^(?!.*(?:港|台|韩|日|新)).*"}
 
