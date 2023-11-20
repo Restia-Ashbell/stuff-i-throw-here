@@ -268,8 +268,6 @@ rules:
   - RULE-SET,games-cn,🎯 全球直连
   - RULE-SET,ProxyMedia,🚀 节点选择
   - RULE-SET,ProxyLite,🚀 节点选择
-  - RULE-SET,ChinaDomain,🎯 全球直连
-  - RULE-SET,ChinaCompanyIp,🎯 全球直连
   # ruleset=🎯 全球直连,[]GEOIP,CN
   - RULE-SET,cn,🎯 全球直连
   - RULE-SET,cnip,🎯 全球直连
