@@ -151,11 +151,11 @@ dns:
 
 proxy-groups:
 
-  - {name: 🚀 节点选择, type: select, proxies: [亚洲节点, 日本节点, ♻️ 自动选择, 全部节点, DIRECT]}
+  - {name: 🚀 节点选择, type: select, proxies: [ 🌏 亚洲节点, 🌍 欧美节点, 🌐 全部节点, ♻️ 自动选择, DIRECT]}
 
   - {name: 🌐 全部节点, type: select, include-all-providers: true}
 
-  - {name: ♻️ 自动选择, include-all-providers: true, interval: 300, tolerance: 50, type: url-test}
+  - {name: ♻️ 自动选择, type: url-test, include-all-providers: true, interval: 300, tolerance: 50}
 
   # - {name: dns, type: select, proxies: [DIRECT, WARP, 香港, 台湾, 日本, 新加坡, 美国, 其它地区, 全部节点, 自动选择]}  # 加入 WARP
 
