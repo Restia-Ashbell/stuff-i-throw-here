@@ -151,11 +151,9 @@ dns:
 
 proxy-groups:
 
-  - {name: 🚀 节点选择, type: select, proxies: [ 🌏 亚洲节点, 🌍 欧美节点, 🌐 全部节点, ♻️ 自动选择, DIRECT]}
+  - {name: 🚀 节点选择, type: select, proxies: [ 🌏 亚洲节点, 🌍 欧美节点, ♻️ 自动选择, DIRECT], use: [🛫 我的专机]}
 
-  - {name: 🌐 全部节点, type: select, use: [🛫 我的专机]}
-
-  - {name: ♻️ 自动选择, type: url-test, proxies: [🌐 全部节点], interval: 300, tolerance: 50}
+  - {name: ♻️ 自动选择, type: url-test, interval: 300, tolerance: 50, use: [🛫 我的专机]}
 
   # - {name: dns, type: select, proxies: [DIRECT, WARP, 香港, 台湾, 日本, 新加坡, 美国, 其它地区, 全部节点, 自动选择]}  # 加入 WARP
 
@@ -168,9 +166,9 @@ proxy-groups:
   - {name: 🐟 漏网之鱼, type: select, proxies: [🚀 节点选择, 🎯 全球直连]}
 
   #分隔,下面是地区分组
-  - {name: 🌏 亚洲节点, type: load-balance, strategy: consistent-hashing, lazy: true, proxies: [🌐 全部节点], filter: "(?i)港|台|韩|日|新|"}
+  - {name: 🌏 亚洲节点, type: load-balance, strategy: consistent-hashing, lazy: true, use: [🛫 我的专机], filter: "(?i)港|台|韩|日|新|"}
 
-  - {name: 🌍 欧美节点, type: load-balance, strategy: consistent-hashing, lazy: true, proxies: [🌐 全部节点], filter: "(?i)^(?!.*(?:港|台|韩|日|新)).*"}
+  - {name: 🌍 欧美节点, type: load-balance, strategy: consistent-hashing, lazy: true, use: [🛫 我的专机], filter: "(?i)^(?!.*(?:港|台|韩|日|新)).*"}
 
 rule-providers:
   LocalAreaNetwork:
