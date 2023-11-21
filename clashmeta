@@ -22,6 +22,7 @@ profile:
   store-fake-ip: true
 dns:
   enabled: true
+  prefer-h3: true
   listen: 0.0.0.0:1053
   ipv6: true
   enhanced-mode: fake-ip
@@ -144,10 +145,8 @@ dns:
   nameserver:
     - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
-    - https://public.dns.iij.jp/dns-query
-    - https://dns.twnic.tw/dns-query
-    - tls://dns.google:853
-    - tls://1.1.1.1:853
+    - https://1.0.0.1/dns-query
+    - tls://101.101.101.101:853
 
 proxy-groups:
 
@@ -168,7 +167,7 @@ proxy-groups:
   #分隔,下面是地区分组
   - {name: 🌏 亚洲节点, type: load-balance, strategy: consistent-hashing, lazy: true, use: [🛫 我的专机], filter: "(?i)港|台|韩|日|新"}
 
-  - {name: 🌍 欧美节点, type: load-balance, strategy: consistent-hashing, lazy: true, use: [🛫 我的专机], filter: "(?i)^(?!.*(?:港|台|韩|日|新)).*"}
+  - {name: 🌍 欧美节点, type: load-balance, strategy: consistent-hashing, lazy: true, use: [🛫 我的专机], exclude-filter: "(?i)港|台|韩|日|新"}
 
 rule-providers:
   LocalAreaNetwork:
@@ -180,7 +179,7 @@ rule-providers:
 
   BanAD:
     type: http
-    behavior: domain
+    behavior: classical
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list"
     path: ./ruleset/BanAD.yaml
     interval: 259200
@@ -215,7 +214,7 @@ rule-providers:
 
   GoogleCN:
     type: http
-    behavior: domain
+    behavior: classical
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/GoogleCN.list"
     path: ./ruleset/GoogleCN.yaml
     interval: 259200
