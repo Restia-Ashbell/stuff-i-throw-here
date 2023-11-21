@@ -144,10 +144,10 @@ dns:
     - 114.114.114.114
     - 64.6.65.6
   nameserver:
-    - 'https://dns.alidns.com/dns-query#🚀 节点选择&h3=true'
-    - 'https://cloudflare-dns.com.com/dns-query#🚀 节点选择&h3=true'
+    # - 'https://dns.alidns.com/dns-query#🚀 节点选择&h3=true'
+    # - 'https://cloudflare-dns.com.com/dns-query#🚀 节点选择&h3=true'
     - 'https://dns.adguard.com/dns-query#🚀 节点选择&h3=true'
-    - 'https://dns.google/dns-query#🚀 节点选择&h3=true'
+    # - 'https://dns.google/dns-query#🚀 节点选择&h3=true'
   proxy-server-nameserver:
     - tls://101.101.101.101:853
     - tls://1.0.0.1:853
