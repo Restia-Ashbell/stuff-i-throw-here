@@ -156,9 +156,7 @@ proxy-groups:
 
   - {name: 🎯 全球直连, type: select, proxies: [DIRECT, 🚀 节点选择]}
 
-  - {name: 🛑 全球拦截, type: select, proxies: [REJECT, DIRECT]}
-  
-  - {name: 🆎 AdBlock, type: select, proxies: [REJECT, DIRECT]}
+  - {name: 🛑 广告拦截, type: select, proxies: [REJECT, DIRECT]}
 
   - {name: 🐟 漏网之鱼, type: select, proxies: [🚀 节点选择, 🎯 全球直连]}
 
@@ -240,7 +238,7 @@ rule-providers:
 
 rules:
   - RULE-SET,private,🎯 全球直连
-  - RULE-SET,ads,🛑 全球拦截
+  - RULE-SET,ads,🛑 广告拦截
   - RULE-SET,microsoft-cn,🎯 全球直连
   - RULE-SET,google-cn,🎯 全球直连
   - RULE-SET,games-cn,🎯 全球直连
