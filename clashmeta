@@ -168,111 +168,86 @@ proxy-groups:
   - {name: 🌍 欧美节点, type: load-balance, strategy: consistent-hashing, lazy: true, use: [🛫 我的专机], exclude-filter: "(?i)港|台|韩|日|新"}
 
 rule-providers:
-  LocalAreaNetwork:
+  private:
     type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list"
-    path: ./ruleset/LocalAreaNetwork.yaml
-    interval: 259200
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/private.yaml"
+    path: ./ruleset/private.yaml
+    interval: 86400
 
-  BanAD:
+  ads:
     type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list"
-    path: ./ruleset/BanAD.yaml
-    interval: 259200
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/ads.yaml"
+    path: ./ruleset/ads.yaml
+    interval: 86400
 
-  BanProgramAD:
+  microsoft-cn:
     type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list"
-    path: ./ruleset/BanProgramAD.yaml
-    interval: 259200
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/microsoft-cn.yaml"
+    path: ./ruleset/microsoft-cn.yaml
+    interval: 86400
 
-  BanEasyList:
+  google-cn:
     type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanEasyList.list"
-    path: ./ruleset/BanEasyList.yaml
-    interval: 259200
-
-  BanEasyListChina:
-    type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanEasyListChina.list"
-    path: ./ruleset/BanEasyListChina.yaml
-    interval: 259200
-
-  BanEasyPrivacy:
-    type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanEasyPrivacy.list"
-    path: ./ruleset/BanEasyPrivacy.yaml
-    interval: 259200
-
-  GoogleCN:
-    type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/GoogleCN.list"
-    path: ./ruleset/GoogleCN.yaml
-    interval: 259200
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/google-cn.yaml"
+    path: ./ruleset/google-cn.yaml
+    interval: 86400
 
   games-cn:
     type: http
     behavior: domain
     url: "https://fastly.jsdelivr.net/gh/DustinWin/clash-ruleset@release/games-cn.yaml"
     path: ./ruleset/games-cn.yaml
-    interval: 259200
+    interval: 86400
 
-  ProxyMedia:
+  proxy:
     type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list"
-    path: ./ruleset/ProxyMedia.yaml
-    interval: 259200
-
-  ProxyGFWlist:
-    type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list"
-    path: ./ruleset/ProxyGFWlist.yaml
-    interval: 259200
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/proxy.yaml"
+    path: ./ruleset/proxy.yaml
+    interval: 86400
 
   cn:
     type: http
     behavior: domain
-    url: "https://fastly.jsdelivr.net/gh/DustinWin/clash-ruleset@release/cn.yaml"
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/cn.yaml"
     path: ./ruleset/cn.yaml
-    interval: 259200
+    interval: 86400
 
-  ChinaCompanyIp:
+  telegramip:
     type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaCompanyIp.list"
-    path: ./ruleset/ChinaCompanyIp.yaml
-    interval: 259200
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/telegramip.yaml"
+    path: ./ruleset/telegramip.yaml
+    interval: 86400
 
-  ChinaIp:
+  privateip:
     type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaIp.list"
-    path: ./ruleset/ChinaIp.yaml
-    interval: 259200
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/privateip.yaml"
+    path: ./ruleset/privateip.yaml
+    interval: 86400
+
+  cnip:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/cnip.yaml"
+    path: ./ruleset/cnip.yaml
+    interval: 86400
 
 rules:
-  payload:
-    - RULE-SET,LocalAreaNetwork,🎯 全球直连
-    - RULE-SET,BanAD,🛑 全球拦截
-    - RULE-SET,BanProgramAD,🛑 全球拦截
-    - RULE-SET,BanEasyList,🆎 AdBlock
-    - RULE-SET,BanEasyListChina,🆎 AdBlock
-    - RULE-SET,BanEasyPrivacy,🆎 AdBlock
-    - RULE-SET,GoogleCN,🎯 全球直连
-    - RULE-SET,ProxyMedia,🚀 节点选择
-    - RULE-SET,ProxyGFWlist,🚀 节点选择
+  - RULE-SET,private,🎯 全球直连
+  - RULE-SET,ads,🛑 全球拦截
+  - RULE-SET,microsoft-cn,🎯 全球直连
+  - RULE-SET,google-cn,🎯 全球直连
   - RULE-SET,games-cn,🎯 全球直连
+  - RULE-SET,proxy,🚀 节点选择
   - RULE-SET,cn,🎯 全球直连
-  - RULE-SET,ChinaCompanyIp,🎯 全球直连
-  - RULE-SET,ChinaIp,🎯 全球直连
+  - RULE-SET,telegramip,🚀 节点选择
+  - RULE-SET,privateip,🎯 全球直连,no-resolve
+  - RULE-SET,cnip,🎯 全球直连
   # GEOIP,CN,🎯 全球直连,no-resolve
   - MATCH,🐟 漏网之鱼
