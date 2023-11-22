@@ -150,9 +150,9 @@ dns:
 
 proxy-groups:
 
-  - {name: 🚀 节点选择, type: select, proxies: [ 🌏 亚洲节点, 🌍 欧美节点, ♻️ 自动选择, DIRECT], use: [🛫 我的专机]}
+  - {name: 🚀 节点选择, type: select, proxies: [ 🌏 亚洲节点, 🌍 欧美节点, 🔮 负载均衡, DIRECT], use: [🛫 我的专机]}
 
-  - {name: ♻️ 自动选择, type: url-test, interval: 300, tolerance: 50, use: [🛫 我的专机]}
+  - {name: 🔮 负载均衡, type: load-balance, strategy: consistent-hashing, lazy: true, use: [🛫 我的专机]}
 
   - {name: 🎯 全球直连, type: select, proxies: [DIRECT, 🚀 节点选择]}
 
@@ -161,9 +161,9 @@ proxy-groups:
   - {name: 🐟 漏网之鱼, type: select, proxies: [🚀 节点选择, 🎯 全球直连]}
 
   #分隔,下面是地区分组
-  - {name: 🌏 亚洲节点, type: load-balance, strategy: consistent-hashing, lazy: true, use: [🛫 我的专机], filter: "(?i)港|台|韩|日|新"}
+  - {name: 🌏 亚洲节点, type: url-test, interval: 300, tolerance: 50, lazy: true, use: [🛫 我的专机], filter: "(?i)港|台|韩|日|新"}
 
-  - {name: 🌍 欧美节点, type: load-balance, strategy: consistent-hashing, lazy: true, use: [🛫 我的专机], exclude-filter: "(?i)港|台|韩|日|新"}
+  - {name: 🌍 欧美节点, type: url-test, interval: 300, tolerance: 50, lazy: true, use: [🛫 我的专机], exclude-filter: "(?i)港|台|韩|日|新"}
 
 rule-providers:
   private:
