@@ -260,16 +260,17 @@ rule-providers:
     interval: 259200
 
 rules:
-  - RULE-SET,LocalAreaNetwork,🎯 全球直连
-  - RULE-SET,BanAD,🛑 全球拦截
-  - RULE-SET,BanProgramAD,🛑 全球拦截
-  - RULE-SET,BanEasyList,🆎 AdBlock
-  - RULE-SET,BanEasyListChina,🆎 AdBlock
-  - RULE-SET,BanEasyPrivacy,🆎 AdBlock
-  - RULE-SET,GoogleCN,🎯 全球直连
+  payload:
+    - RULE-SET,LocalAreaNetwork,🎯 全球直连
+    - RULE-SET,BanAD,🛑 全球拦截
+    - RULE-SET,BanProgramAD,🛑 全球拦截
+    - RULE-SET,BanEasyList,🆎 AdBlock
+    - RULE-SET,BanEasyListChina,🆎 AdBlock
+    - RULE-SET,BanEasyPrivacy,🆎 AdBlock
+    - RULE-SET,GoogleCN,🎯 全球直连
+    - RULE-SET,ProxyMedia,🚀 节点选择
+    - RULE-SET,ProxyGFWlist,🚀 节点选择
   - RULE-SET,games-cn,🎯 全球直连
-  - RULE-SET,ProxyMedia,🚀 节点选择
-  - RULE-SET,ProxyGFWlist,🚀 节点选择
   - RULE-SET,cn,🎯 全球直连
   - RULE-SET,ChinaCompanyIp,🎯 全球直连
   - RULE-SET,ChinaIp,🎯 全球直连
