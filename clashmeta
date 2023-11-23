@@ -6,9 +6,9 @@ proxy-providers:
     path: ./proxies/airport.yaml
     interval: 86400
     health-check:
-      enable: false
+      enable: true
       url: "https://www.gstatic.com/generate_204"
-      interval: 600
+      interval: 300
 
 mode: rule
 ipv6: true
@@ -161,7 +161,7 @@ proxy-groups:
   - {name: 🐟 漏网之鱼, type: select, proxies: [🚀 节点选择, 🎯 全球直连]}
 
   #分隔,下面是地区分组
-  - {name: 🌏 亚洲节点, type: url-test, interval: 300, tolerance: 50, use: [🛫 我的专机], filter: "(?i)港|台|韩|日|新"}
+  - {name: 🌏 亚洲节点, type: url-test, interval: 300, tolerance: 50, lazy: true, use: [🛫 我的专机], filter: "(?i)港|台|韩|日|新"}
 
   - {name: 🌍 欧美节点, type: url-test, interval: 300, tolerance: 50, lazy: true, use: [🛫 我的专机], exclude-filter: "(?i)港|台|韩|日|新"}
 
