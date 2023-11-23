@@ -152,7 +152,7 @@ proxy-groups:
 
   - {name: 🚀 节点选择, type: select, proxies: [ 🌏 亚洲节点, 🌍 欧美节点, 🔮 负载均衡, DIRECT], use: [🛫 我的专机]}
 
-  - {name: 🔮 负载均衡, type: load-balance, strategy: consistent-hashing, lazy: true, use: [🛫 我的专机]}
+  - {name: 🔮 负载均衡, type: load-balance, strategy: consistent-hashing, use: [🛫 我的专机]}
 
   - {name: 🎯 全球直连, type: select, proxies: [DIRECT, 🚀 节点选择]}
 
