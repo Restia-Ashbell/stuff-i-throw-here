@@ -11,9 +11,9 @@ proxy-providers:
       interval: 600
   hysteria:
     type: http
-    url: "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/protocols/hysteria"
+    url: "https://dy.restia.love"
     path: ./proxies/airport.yaml
-    interval: 86400
+    interval: 1800
     health-check:
       enable: true
       url: "https://www.gstatic.com/generate_204"
