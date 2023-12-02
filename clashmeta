@@ -9,15 +9,6 @@ proxy-providers:
       enable: true
       url: "https://www.gstatic.com/generate_204"
       interval: 600
-  hysteria:
-    type: http
-    url: "https://dy.restia.love"
-    path: ./proxies/airport.yaml
-    interval: 1800
-    health-check:
-      enable: true
-      url: "https://www.gstatic.com/generate_204"
-      interval: 600
 
 mode: rule
 ipv6: true
@@ -173,8 +164,6 @@ proxy-groups:
   - {name: 🌏 亚洲节点, type: url-test, interval: 300, tolerance: 50, lazy: true, use: [🛫 我的专机], filter: "(?i)港|台|韩|日|新"}
 
   - {name: 🌍 欧美节点, type: url-test, interval: 300, tolerance: 50, lazy: true, use: [🛫 我的专机], exclude-filter: "(?i)港|台|韩|日|新"}
-
-  - {name: hysteria, type: url-test, interval: 300, tolerance: 50, lazy: true, use: [hysteria]}
 
 rule-providers:
   private:
