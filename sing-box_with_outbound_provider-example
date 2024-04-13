@@ -1,0 +1,285 @@
+{
+  "log": {
+    "level": "info",
+    "timestamp": true
+  },
+  "experimental": {
+    "clash_api": {
+      "external_controller": "127.0.0.1:20123",
+      "external_ui": "",
+      "secret": "ID_vzgatc77",
+      "external_ui_download_url": "",
+      "default_mode": "rule"
+    },
+    "cache_file": {
+      "enabled": true,
+      "store_fakeip": true
+    }
+  },
+  "inbounds": [
+    {
+      "type": "mixed",
+      "listen": "127.0.0.1",
+      "listen_port": 20122,
+      "sniff": false,
+      "sniff_override_destination": false
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "🚀 节点选择",
+      "type": "selector",
+      "outbounds": [
+        "♻️ 自动选择",
+        "🔑 专用线路",
+        "🎯 全球直连"
+      ]
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "dns",
+      "tag": "dns-out"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    }
+  ],
+    "outbound_providers": [
+    {
+      "tag": "singbox-http",
+      "type": "http",
+      "download_url": "订阅链接",
+      "download_interval": "24h",
+      "path": "singbox-http.json",
+      "healthcheck_interval": "1h",
+      "download_ua": "sing-box",
+      "download_detour": "direct"
+    }
+  ],
+  "route": {
+    "rule_set": [
+      {
+        "tag": "ads",
+        "type": "local",
+        "format": "binary",
+        "path": "../rulesets/ads.srs"
+      },
+      {
+        "tag": "private",
+        "type": "local",
+        "format": "binary",
+        "path": "../rulesets/private.srs"
+      },
+      {
+        "tag": "microsoft-cn",
+        "type": "local",
+        "format": "binary",
+        "path": "../rulesets/microsoft-cn.srs"
+      },
+      {
+        "tag": "games-cn",
+        "type": "local",
+        "format": "binary",
+        "path": "../rulesets/games-cn.srs"
+      },
+      {
+        "tag": "openai",
+        "type": "local",
+        "format": "binary",
+        "path": "../rulesets/openai.srs"
+      },
+      {
+        "tag": "proxy",
+        "type": "local",
+        "format": "binary",
+        "path": "../rulesets/proxy.srs"
+      },
+      {
+        "tag": "cn",
+        "type": "local",
+        "format": "binary",
+        "path": "../rulesets/cn.srs"
+      },
+      {
+        "tag": "telegramip",
+        "type": "local",
+        "format": "binary",
+        "path": "../rulesets/telegramip.srs"
+      },
+      {
+        "tag": "privateip",
+        "type": "local",
+        "format": "binary",
+        "path": "../rulesets/privateip.srs"
+      },
+      {
+        "tag": "cnip",
+        "type": "local",
+        "format": "binary",
+        "path": "../rulesets/cnip.srs"
+      }
+    ],
+    "rules": [
+      {
+        "protocol": "dns",
+        "port": 53,
+        "outbound": "dns-out"
+      },
+      {
+        "network": "udp",
+        "port": 443,
+        "outbound": "🛑 全球拦截"
+      },
+      {
+        "clash_mode": "direct",
+        "outbound": "🎯 全球直连"
+      },
+      {
+        "clash_mode": "global",
+        "outbound": "🚀 节点选择"
+      },
+      {
+        "rule_set": "ads",
+        "outbound": "🛑 全球拦截"
+      },
+      {
+        "rule_set": "private",
+        "outbound": "🎯 全球直连"
+      },
+      {
+        "rule_set": "microsoft-cn",
+        "outbound": "🎯 全球直连"
+      },
+      {
+        "rule_set": "games-cn",
+        "outbound": "🎯 全球直连"
+      },
+      {
+        "rule_set": "openai",
+        "outbound": "🤖 OpenAI"
+      },
+      {
+        "rule_set": "proxy",
+        "outbound": "🚀 节点选择"
+      },
+      {
+        "rule_set": "cn",
+        "outbound": "🎯 全球直连"
+      },
+      {
+        "rule_set": "telegramip",
+        "outbound": "🚀 节点选择"
+      },
+      {
+        "rule_set": "privateip",
+        "outbound": "🎯 全球直连"
+      },
+      {
+        "rule_set": "cnip",
+        "outbound": "🎯 全球直连"
+      }
+    ],
+    "final": "🐟 漏网之鱼",
+    "auto_detect_interface": true
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "remote-dns",
+        "address": "h3://1.1.1.1/dns-query",
+        "address_resolver": "remote-resolver-dns",
+        "detour": "🚀 节点选择"
+      },
+      {
+        "tag": "local-dns",
+        "address": "https://dns.ipv6dns.com/dns-query",
+        "address_resolver": "resolver-dns",
+        "detour": "direct"
+      },
+      {
+        "tag": "resolver-dns",
+        "address": "local",
+        "detour": "direct"
+      },
+      {
+        "tag": "remote-resolver-dns",
+        "address": "local",
+        "detour": "🚀 节点选择"
+      },
+      {
+        "tag": "fakeip-dns",
+        "address": "fakeip"
+      },
+      {
+        "tag": "block",
+        "address": "rcode://success"
+      }
+    ],
+    "rules": [
+      {
+        "outbound": "any",
+        "disable_cache": true,
+        "server": "local-dns"
+      },
+      {
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "domain_suffix": [
+              ".lan",
+              ".localdomain",
+              ".example",
+              ".invalid",
+              ".localhost",
+              ".test",
+              ".local",
+              ".home.arpa",
+              ".msftconnecttest.com",
+              ".msftncsi.com"
+            ],
+            "invert": true
+          },
+          {
+            "query_type": [
+              "A",
+              "AAAA"
+            ]
+          }
+        ],
+        "server": "fakeip-dns"
+      },
+      {
+        "clash_mode": "direct",
+        "server": "local-dns"
+      },
+      {
+        "clash_mode": "global",
+        "server": "remote-dns"
+      },
+      {
+        "rule_set": "ads",
+        "server": "block"
+      },
+      {
+        "rule_set": "proxy",
+        "server": "remote-dns"
+      },
+      {
+        "rule_set": "cn",
+        "server": "resolver-dns"
+      }
+    ],
+    "fakeip": {
+      "enabled": true,
+      "inet4_range": "198.18.0.1/16",
+      "inet6_range": "fc00::/18"
+    },
+    "final": "remote-dns",
+    "strategy": "ipv4_only"
+  }
+}
