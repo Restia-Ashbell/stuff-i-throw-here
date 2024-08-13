@@ -154,7 +154,7 @@ dns:
 
 proxy-groups:
 
-  - {name: 🚀 节点选择, type: select, proxies: [♻️ 自动选择, ⚡ 专用线路, 🔮 负载均衡, 🌀️ udp节点, 🌟 质量节点, 🔑 解锁节点, 🌸 日本节点, DIRECT]}
+  - {name: 🚀 节点选择, type: select, proxies: [♻️ 自动选择, 🔮 负载均衡, DIRECT]}
   
   - {name: ♻️ 自动选择, type: url-test, tolerance: 25, include-all-providers: true, exclude-filter: "(?i)套餐|流量|剩余"}  
   
