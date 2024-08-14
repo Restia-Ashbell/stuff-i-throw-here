@@ -21,6 +21,17 @@ unzip -o "client-${OS_ARCH}-unknown-linux-musl.zip"
 # 移动服务文件到 systemd 目录
 mv -v stat_client.service /etc/systemd/system/stat_client.service
 
+# 判断虚拟化
+if [ -x "$(type -p systemd-detect-virt)" ]; then
+    VIRT=$(systemd-detect-virt)
+elif [ -x "$(type -p hostnamectl)" ]; then
+    VIRT=$(hostnamectl | awk '/Virtualization/{print $NF}')
+elif [ -x "$(type -p virt-what)" ]; then
+    VIRT=$(virt-what)
+else
+    VIRT="Unknown"
+fi
+
 # 询问服务器的主机名和所在地
 read -p "请输入服务器的主机名: " SERVER_ALIAS
 read -p "请输入服务器的所在地(国家简码 例如cn): " SERVER_LOCATION
@@ -37,7 +48,7 @@ Group=root
 Environment="RUST_BACKTRACE=1"
 WorkingDirectory=/opt/ServerStatus
 # EnvironmentFile=/opt/ServerStatus/.env
-ExecStart=/opt/ServerStatus/stat_client -a https://tz.restia.love/report -g vps -p restia --alias $SERVER_ALIAS --location $SERVER_LOCATION
+ExecStart=/opt/ServerStatus/stat_client -a https://tz.restia.love/report -g vps -p restia --type $VIRT --alias $SERVER_ALIAS --location $SERVER_LOCATION
 ExecReload=/bin/kill -HUP \$MAINPID
 Restart=on-failure
 
