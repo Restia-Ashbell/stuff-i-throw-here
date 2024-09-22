@@ -48,7 +48,7 @@ Group=root
 Environment="RUST_BACKTRACE=1"
 WorkingDirectory=/opt/ServerStatus
 # EnvironmentFile=/opt/ServerStatus/.env
-ExecStart=/opt/ServerStatus/stat_client -a https://tz.restia.love/report -g vps -p restia --type $VIRT --alias $SERVER_ALIAS --location $SERVER_LOCATION
+ExecStart=/opt/ServerStatus/stat_client -a https://tz.restia.site/report -g vps -p restia --type $VIRT --alias $SERVER_ALIAS --location $SERVER_LOCATION
 ExecReload=/bin/kill -HUP \$MAINPID
 Restart=on-failure
 
