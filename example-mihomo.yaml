@@ -1,0 +1,160 @@
+######### 锚点 start #######
+#这里是订阅更新和延迟测试相关的
+p: &p {type: http, interval: 86400, health-check: {enable: true, url: "https://www.gstatic.com/generate_204", interval: 3600}, header: {User-Agent: [mihomo/1.18.9 NekoBox/4.0 (Prefer ClashMeta Format)]}}
+######### 锚点 end #######
+
+#  订阅链接
+proxy-providers:  
+  provider1:
+    <<: *p
+    url: "https://example.com"
+    path: ./proxies/example.yaml
+
+mode: rule
+ipv6: true
+allow-lan: false
+log-level: info
+mixed-port: 7890
+external-controller: 127.0.0.1:9090
+tcp-concurrent: true
+global-client-fingerprint: chrome
+profile:
+  store-selected: true
+  store-fake-ip: true
+dns:
+  enable: true
+  ipv6: true
+  prefer-h3: true
+  listen: :1053
+  enhanced-mode: fake-ip
+  fake-ip-range: 28.0.0.1/8
+  fake-ip-filter-mode: whitelist
+  fake-ip-filter:
+    - 'rule-set:openai,abema,proxy'
+  nameserver:
+    - 'https://dns.google/dns-query#🚀 节点选择&ecs=175.1.0.0/16&ecs-override=true'
+  nameserver-policy:
+    'rule-set:ads': rcode://name_error
+    'rule-set:private,cn':
+      - system
+      - 223.6.6.6
+      - 114.114.114.114
+  proxy-server-nameserver:
+    - quic://dns.alidns.com
+    - quic://dns.nextdns.io
+
+proxy-groups:
+
+  - {name: 🚀 节点选择, type: select, proxies: [♻️ 自动选择, ⚡ 专用线路, 🔮 负载均衡, 🌀️ UDP节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇰🇷 韩国节点, 🇺🇸 美国节点, DIRECT]}
+  
+  - {name: ♻️ 自动选择, type: url-test, tolerance: 25, include-all-providers: true, exclude-filter: "(?i)套餐|流量|剩余|官网"}  
+  
+  - {name: ⚡ 专用线路, type: select, use: [自建]}
+  
+  - {name: 🤖 OpenAI, type: url-test, use: [解锁]}
+
+  - {name: 📺 AbemaTV, type: url-test, use: [解锁]}
+
+  - {name: 🔮 负载均衡, type: load-balance, strategy: consistent-hashing, use: [自建], filter: "(?i)HK"}
+
+  - {name: 🎯 全球直连, type: select, proxies: [DIRECT, 🚀 节点选择]}
+
+  - {name: 🛑 广告拦截, type: select, proxies: [REJECT, DIRECT]}
+
+  - {name: 🐟 漏网之鱼, type: select, proxies: [🚀 节点选择, 🎯 全球直连]}
+
+  #分隔,下面是自定义分组
+
+  - {name: 🌀️ UDP节点, type: url-test, tolerance: 25, include-all-providers: true, exclude-type: "Http|Socks5|Shadowsocks|ShadowsocksR|Vmess|Vless|Trojan"}
+  
+  - {name: 🇯🇵 日本节点, type: url-test, tolerance: 25, include-all-providers: true, filter: "(?i)日本|东京|Japan|JP|🇯🇵"}
+
+  - {name: 🇹🇼 台湾节点, type: url-test, tolerance: 25, include-all-providers: true, filter: "(?i)台|臺|Taiwan|TW|🇹🇼"}
+
+  - {name: 🇰🇷 韩国节点, type: url-test, tolerance: 25, include-all-providers: true, filter: "(?i)韩|韓|首尔|春川|Korea|KR|🇰🇷"}
+
+  - {name: 🇺🇸 美国节点, type: url-test, tolerance: 25, include-all-providers: true, filter: "(?i)美|America|US|🇺🇸"}
+
+rule-providers:
+  private:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/private.mrs"
+    path: ./ruleset/private.mrs
+    interval: 86400
+
+  ads:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/ads.mrs"
+    path: ./ruleset/ads.mrs
+    interval: 86400
+
+  openai:
+    type: http
+    behavior: classical
+    format: yaml
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI_No_Resolve.yaml"
+    path: ./ruleset/openai.yaml
+    interval: 86400
+    
+  abema:
+    type: http
+    behavior: classical
+    format: yaml
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/AbemaTV/AbemaTV_No_Resolve.yaml"
+    path: ./ruleset/abema.yaml
+    interval: 86400
+    
+  proxy:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/proxy.mrs"
+    path: ./ruleset/proxy.mrs
+    interval: 86400
+
+  cn:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/cn.mrs"
+    path: ./ruleset/cn.mrs
+    interval: 86400
+
+  telegramip:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/telegramip.mrs"
+    path: ./ruleset/telegramip.mrs
+    interval: 86400
+
+  privateip:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/privateip.mrs"
+    path: ./ruleset/privateip.mrs
+    interval: 86400
+
+  cnip:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/cnip.mrs"
+    path: ./ruleset/cnip.mrs
+    interval: 86400
+    
+rules:
+  - RULE-SET,private,🎯 全球直连
+  - RULE-SET,ads,🛑 广告拦截
+  - RULE-SET,openai,🤖 OpenAI
+  - RULE-SET,abema,📺 AbemaTV
+  - RULE-SET,proxy,🚀 节点选择
+  - RULE-SET,telegramip,🚀 节点选择
+  - RULE-SET,privateip,🎯 全球直连
+  - RULE-SET,cnip,🎯 全球直连
+  - MATCH,🐟 漏网之鱼
