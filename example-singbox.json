@@ -191,7 +191,8 @@
                 "outbound": "🎯 全球直连"
             }
         ],
-        "final": "🐟 漏网之鱼"
+        "final": "🐟 漏网之鱼",
+        "auto_detect_interface": true
     },
     "dns": {
         "servers": [
